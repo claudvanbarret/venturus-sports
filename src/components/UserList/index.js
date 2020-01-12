@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropertyUtils from '../../utils/PropertyUtils';
 
 import './style.less';
+import ConfirmDialog from '../ConfirmDialog';
 
 export default function ListUser(props){
-    const {users} = props;
+    const {users, deleteUser} = props;
+    const [confirm, setConfirm] = useState(false);
+    const [user, setUser] = useState(false);
+
+    function openModal(user){
+        setConfirm(true);
+        setUser(user);
+    }
+
     return (
         <div className="user-list">
             <div className="user-list-header">
@@ -41,13 +50,14 @@ export default function ListUser(props){
                             <td className="cell-standard green">{user.posts}</td>
                             <td className="cell-standard green">{user.albums}</td>
                             <td className="cell-standard">{user.photos}</td>
-                            <td className="cell-standard" onClick={() => setUsers(deleteUser(user))}>
+                            <td className="cell-standard" onClick={() => openModal(user)}>
                                 <i className="fas fa-trash-alt"></i>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <ConfirmDialog open={confirm} callback={deleteUser} closeModal={() => setConfirm(false)} user={user}/>
         </div>
     )
 }
