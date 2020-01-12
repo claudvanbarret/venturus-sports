@@ -1,6 +1,35 @@
 @import '../../variables.less';
 
 .user-list {
+
+    .user-list-header {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        margin-bottom: 15px;
+
+        .user-list-title {
+            margin-right: 30px;
+            font-size: 36px;
+            color: @grey;
+        }
+
+        .user-list-bar {
+            border: 2px solid @grey-light-hover;
+            width: 30%;
+            border-radius: 5px;
+        }
+
+        .user-list-search {
+            height: 35px;
+            min-width: 15%;
+            margin-left: 40px;
+            padding: 0px 10px;
+            border: 1px solid @grey-light-hover;
+            border-radius: 5px;
+        }
+    }
+
     .table {
         border-spacing: 0;   
     }

@@ -98,6 +98,11 @@ export default function ListUser(){
 
     return (
         <div className="user-list">
+            <div className="user-list-header">
+                <span className="user-list-title">Users</span>
+                <span className="user-list-bar"></span>
+                <input type="text" className="user-list-search" placeholder="Filter table content"/>
+            </div>
             <table className="table">
                 <thead>
                     <tr className="header-row">
