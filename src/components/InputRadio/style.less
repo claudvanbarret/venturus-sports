@@ -1,0 +1,53 @@
+@import '../../variables.less';
+
+.input-radio {
+    margin-right: 25px;
+
+    input {
+        position: absolute;
+        left: -9999px;
+    }
+
+    label {
+        position: relative;
+        padding: 3px 0 0 40px;
+        cursor: pointer;
+    }
+
+    label:before {
+        content: '';
+        background: #fff;
+        border: 1px solid @grey;
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    label:after {
+        content: '';
+        background: @grey;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        opacity: 0;
+    }
+
+    input:hover + label:before  {
+        border-color: @green;
+    }
+
+    input:checked + label:before {
+        border-color: @green;
+    }
+
+    input:checked + label:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

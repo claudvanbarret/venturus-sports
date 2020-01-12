@@ -1,0 +1,41 @@
+@import '../../variables.less';
+
+.input-text {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    color: @grey;
+
+    label {
+        font-weight: 700;
+    }
+
+    input {
+        height: 35px;
+        padding: 0px 10px;
+        border: 1px solid @grey-light-hover;
+        border-radius: 5px;
+
+        &:focus {
+            border-color: @green;
+        }
+
+        &:focus + .field-instruction {
+            visibility: visible;
+        }
+    }
+
+    .input-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .field-instruction {
+        visibility: hidden;
+        font-size: 12px;
+    }
+
+    .optional {
+        font-size: 12px;
+    }
+}

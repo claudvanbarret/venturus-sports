@@ -1,0 +1,52 @@
+@import '../../variables.less';
+
+.form-user {
+
+    form {
+        display: flex;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        padding: 20px;
+    }
+
+    .form-actions {
+        display: flex;
+    }
+
+    .btn {
+        margin-right: 15px;
+        padding: 8px 20px;
+        background: none;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+
+        &.btn-save {
+            background-color: @green;
+        }
+
+        &.btn-discard {
+            background-color:@grey-light-hover;
+            color: #666666;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 40px;
+
+        .label {
+            font-weight: 700;
+        }
+
+        .fields {
+            display: flex;
+            margin-top: 8px;
+        }
+    }
+}
