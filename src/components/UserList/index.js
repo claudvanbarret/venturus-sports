@@ -46,7 +46,7 @@ export default function ListUser(props){
                             </td>
                             <td className="cell-standard green">{PropertyUtils.getValue(user, 'address.city')}</td>
                             <td className="cell-standard">{user.rideInGroup}</td>
-                            <td className="cell-standard">{user.dayOfTheWeek}</td>
+                            <td className="cell-standard">{user.daysOfTheWeek}</td>
                             <td className="cell-standard green">{user.posts}</td>
                             <td className="cell-standard green">{user.albums}</td>
                             <td className="cell-standard">{user.photos}</td>

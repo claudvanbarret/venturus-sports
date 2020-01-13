@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
-import UserList from '../../components/UserList';
+import FormUser from '../../components/FormUser';
 import { UserConsumer } from '../../contexts/User';
 
 import './style.less';
 
 export default class Users extends Component {
-    render() {
-        return (
+    render(){
+        return(
             <UserConsumer>
-                {({ users, deleteUser }) =>
+                {({ handleSubmit }) =>
                     <div className="users">
-                        <UserList users={users} deleteUser={deleteUser} />
-                    </div>
+                      <FormUser handleSubmit={handleSubmit} />
+                   </div>
                 }
             </UserConsumer>
         );

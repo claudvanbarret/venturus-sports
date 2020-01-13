@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 
 import InputText from '../InputText';
 import InputRadio from '../InputRadio';
@@ -18,6 +18,8 @@ export default class FormUser extends Component {
                 daysOfTheWeek: []
             }
         };
+
+        this.resetForm = this.resetForm.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -32,30 +34,41 @@ export default class FormUser extends Component {
     handleCheckboxChange({ target : { value, name, checked }}) {
         const { user } = this.state;
         let daysOfTheWeek = user.daysOfTheWeek;
-        
         if(checked) {
             daysOfTheWeek.push(value);
         } else {
             let index = daysOfTheWeek.indexOf(value);
             daysOfTheWeek.splice(index, 1);
         }
-        
         user[name] = daysOfTheWeek;
-        
+        this.setState({user});
+    }
+
+    resetForm() {
         this.setState({
-            user
+            user: {
+                username: '',
+                name: '',
+                email: '',
+                city: '',
+                rideInGroup: '',
+                daysOfTheWeek: []
+            }
         });
     }
 
     onSubmit(event){
         event.preventDefault();
         const { user } = this.state;
+
+        user.daysOfTheWeek = user.daysOfTheWeek.join(', ');
+
         this.props.handleSubmit(user);
+        this.resetForm();
     }
 
     render(){
         const { user } = this.state;
-        const {onSubmit} = this.props;
         return (
             <div className="form-user">
                 <form name="formUser" onSubmit={this.onSubmit}>
@@ -65,7 +78,7 @@ export default class FormUser extends Component {
                         <InputText name="email" label="Email" type="email" value={user.email} onChange={this.handleChange} />
                         <div className="form-actions">
                             <button type="submit" className="btn btn-save">Save</button>
-                            <button className="btn btn-discard">Discard</button>
+                            <button className="btn btn-discard" onClick={this.resetForm}>Discard</button>
                         </div>
                     </div>
                     <div className="inputs">
@@ -73,9 +86,9 @@ export default class FormUser extends Component {
                         <div className="form-group">
                             <label className="label">Ride in group?</label>
                             <div className="fields">
-                                <InputRadio name="rideInGroup" value="Always" id="always" onChange={this.handleChange} />
-                                <InputRadio name="rideInGroup" value="Sometimes" id="sometimes"/>
-                                <InputRadio name="rideInGroup" value="Never" id="never"/>
+                                <InputRadio name="rideInGroup" value="Always" id="always" onChange={this.handleChange} checked={user.rideInGroup === 'Always'} />
+                                <InputRadio name="rideInGroup" value="Sometimes" id="sometimes" onChange={this.handleChange} checked={user.rideInGroup === 'Sometimes'}/>
+                                <InputRadio name="rideInGroup" value="Never" id="never" onChange={this.handleChange} checked={user.rideInGroup === 'Never'}/>
                             </div>
                         </div>
                         <div className="form-group">
