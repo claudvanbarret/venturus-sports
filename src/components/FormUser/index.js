@@ -18,7 +18,9 @@ export default class FormUser extends Component {
                 username: '',
                 name: '',
                 email: '',
-                city: '',
+                address: {
+                    city: ''
+                },
                 rideInGroup: '',
                 daysOfTheWeek: []
             }
@@ -50,16 +52,17 @@ export default class FormUser extends Component {
     }
 
     resetForm() {
-        this.setState({
-            user: {
-                username: '',
-                name: '',
-                email: '',
-                city: '',
-                rideInGroup: '',
-                daysOfTheWeek: []
-            }
-        });
+        let user = {
+            username: '',
+            name: '',
+            email: '',
+            address: {
+                city: ''
+            },
+            rideInGroup: '',
+            daysOfTheWeek: []
+        }
+        this.setState({ user });
     }
 
     onSubmit(event){
