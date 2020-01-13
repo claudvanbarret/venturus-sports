@@ -1,0 +1,57 @@
+@import '../../variables.less';
+
+.registration-banner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    color: @grey;
+
+    .registration-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .title {
+            margin-right: 30px;
+            font-size: 36px;
+        }
+
+        .bar {
+            flex: 1;
+            border: 2px solid @grey-light-hover;
+            border-radius: 5px;
+        }
+    }
+
+    .banners {
+        display: flex;
+
+        .banner-item{
+            display: flex;
+            flex-direction: column;
+
+            &:not(:last-child) {
+                margin-right: 30px;
+            }
+        }
+
+        .banner-body {
+            display: flex;
+            align-items: center;
+        }
+
+        .banner-title {
+            color: @green;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        i {
+            margin-right: 10px;
+            font-size: 50px;
+            color: @green;
+        }
+    }
+}
