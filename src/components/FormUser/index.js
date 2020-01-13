@@ -69,6 +69,8 @@ export default class FormUser extends Component {
         event.preventDefault();
         const { user } = this.state;
 
+        if(user.daysOfTheWeek.length === 0) return;
+
         user.daysOfTheWeek = user.daysOfTheWeek.join(', ');
 
         this.props.handleSubmit(user);
@@ -81,22 +83,22 @@ export default class FormUser extends Component {
             <div className="form-user">
                 <form name="formUser" onSubmit={this.onSubmit}>
                     <div className="inputs">
-                        <InputText name="username" label="Username" value={user.username} onChange={this.handleChange}/>
-                        <InputText name="name" label="Name" value={user.name} onChange={this.handleChange} />
-                        <InputText name="email" label="Email" type="email" value={user.email} onChange={this.handleChange} />
+                        <InputText name="username" label="Username" value={user.username} onChange={this.handleChange} required={true}/>
+                        <InputText name="name" label="Name" value={user.name} onChange={this.handleChange} required={true}/>
+                        <InputText name="email" label="Email" type="email" value={user.email} onChange={this.handleChange} required={true}/>
                         <div className="form-actions">
                             <button type="submit" className="btn btn-save">Save</button>
                             <button className="btn btn-discard" onClick={this.resetForm}>Discard</button>
                         </div>
                     </div>
                     <div className="inputs">
-                        <InputText name="address.city" label="City" optional="true" value={PropertyUtils.getValue(user, 'address.city')} onChange={this.handleChange} />
+                        <InputText name="address.city" label="City" value={PropertyUtils.getValue(user, 'address.city')} onChange={this.handleChange} />
                         <div className="form-group">
                             <label className="label">Ride in group?</label>
                             <div className="fields">
-                                <InputRadio name="rideInGroup" value="Always" id="always" onChange={this.handleChange} checked={user.rideInGroup === 'Always'} />
-                                <InputRadio name="rideInGroup" value="Sometimes" id="sometimes" onChange={this.handleChange} checked={user.rideInGroup === 'Sometimes'}/>
-                                <InputRadio name="rideInGroup" value="Never" id="never" onChange={this.handleChange} checked={user.rideInGroup === 'Never'}/>
+                                <InputRadio name="rideInGroup" value="Always" id="always" onChange={this.handleChange} checked={user.rideInGroup === 'Always'}  required={true}/>
+                                <InputRadio name="rideInGroup" value="Sometimes" id="sometimes" onChange={this.handleChange} checked={user.rideInGroup === 'Sometimes'}  required={true}/>
+                                <InputRadio name="rideInGroup" value="Never" id="never" onChange={this.handleChange} checked={user.rideInGroup === 'Never'}  required={true}/>
                             </div>
                         </div>
                         <div className="form-group">
