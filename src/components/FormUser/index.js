@@ -15,6 +15,11 @@ export default class FormUser extends Component {
         super(props);
         this.state = {
             user: {
+                username: '',
+                name: '',
+                email: '',
+                city: '',
+                rideInGroup: '',
                 daysOfTheWeek: []
             }
         };
