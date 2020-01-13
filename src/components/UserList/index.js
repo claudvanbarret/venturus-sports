@@ -5,13 +5,19 @@ import './style.less';
 import ConfirmDialog from '../ConfirmDialog';
 
 export default function ListUser(props){
-    const {users, deleteUser} = props;
+    const {users, deleteUser, filterUsers} = props;
     const [confirm, setConfirm] = useState(false);
     const [user, setUser] = useState(false);
+    const [searchText, setSearchText] = useState('');
 
     function openModal(user){
         setConfirm(true);
         setUser(user);
+    }
+
+    function handleChangeSearchText({ target : { value }}) {    
+        setSearchText(value);
+        filterUsers(value);
     }
 
     return (
@@ -19,7 +25,12 @@ export default function ListUser(props){
             <div className="user-list-header">
                 <span className="user-list-title">Users</span>
                 <span className="user-list-bar"></span>
-                <input type="text" className="user-list-search" placeholder="Filter table content"/>
+                <div className="input-container">
+                    <input type="text" className="input-search" 
+                        value={searchText} onChange={handleChangeSearchText} 
+                        placeholder="Filter table content"/>
+                    <i className="fas fa-search"></i>
+                </div>
             </div>
             <table className="table">
                 <thead>

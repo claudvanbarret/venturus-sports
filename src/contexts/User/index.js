@@ -16,10 +16,12 @@ class UserProvider extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			users: []
+			users: [],
+			usersBackup: []
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.deleteUser = this.deleteUser.bind(this);
+		this.filterUsers = this.filterUsers.bind(this);
 	}
 
 	componentDidMount() {
@@ -32,7 +34,21 @@ class UserProvider extends Component {
 		const albumsResponse = await api.get('/albums');
 		const postsResponse = await api.get('/posts');
 		const users = this.mergeData(userResponse.data, photosResponse.data, albumsResponse.data, postsResponse.data);
-		this.setState({ users })
+		this.setState({ users });
+		this.setState({ usersBackup: users });
+	}
+
+	filterUsers(searchText){
+		let users = [];
+
+		if(!searchText || /^\s*$/.test(searchText)) {
+			users = this.state.usersBackup;
+		} else {
+			users = this.state.usersBackup.filter(({ name, username }) => {
+				return name.includes(searchText) || username.includes(searchText);
+			});
+		}
+		this.setState({ users });
 	}
 
 	deleteUser(user) {
@@ -40,7 +56,11 @@ class UserProvider extends Component {
 			return u.id != user.id;
 		});
 
-		this.setState({ users });
+		const usersBackup = this.state.usersBackup.filter(u => {
+			return u.id != user.id;
+		});
+
+		this.setState({ users, usersBackup });
 	}
 
 	mergeData(users, photos, albums, posts) {
@@ -105,14 +125,16 @@ class UserProvider extends Component {
 	handleSubmit(user) {
 		let { users } = this.state;
 		users = [...users, user];
-		this.setState({ users })
+		this.setState({ users });
+		this.setState({ usersBackup: users });
 	}
 
 	render() {
 		const value = {
 			...this.state,
 			handleSubmit: this.handleSubmit,
-			deleteUser: this.deleteUser
+			deleteUser: this.deleteUser,
+			filterUsers: this.filterUsers
 		};
 		return <Provider value={value}>{this.props.children}</Provider>;
 	}

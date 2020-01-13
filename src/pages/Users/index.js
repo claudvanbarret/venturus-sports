@@ -9,9 +9,9 @@ export default class Users extends Component {
     render() {
         return (
             <UserConsumer>
-                {({ users, deleteUser }) =>
+                {({ users, deleteUser, filterUsers }) =>
                     <div className="users">
-                        <UserList users={users} deleteUser={deleteUser} />
+                        <UserList users={users} deleteUser={deleteUser} filterUsers={filterUsers}/>
                     </div>
                 }
             </UserConsumer>
