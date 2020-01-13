@@ -1,0 +1,53 @@
+@import '../../variables.less';
+
+.breadcrumb {
+    height: 50px;
+    width: 100%;
+    background-color: @grey-light;
+    
+    .breadcrumb-content {
+        display: flex;
+        height: 100%;
+        width: 80%;
+        margin: auto;
+        align-items: center;
+        font-size: 16px;
+
+        
+    }
+
+    .fa-home {
+        color: @green;
+        margin-right: 15px;
+    }
+
+    
+    .route {
+        color: @grey;
+        
+        a {
+            margin-right: 15px;
+            text-decoration: none;
+        }
+
+        a:-webkit-any-link {
+            color: @grey;
+        }
+
+        a:hover {
+            color: @green;
+            text-decoration: underline;
+        }
+        
+        .fa-chevron-right {
+            margin-right: 15px;
+            color: #999999;
+        }
+    }
+}
+
+ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }

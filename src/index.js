@@ -1,19 +1,27 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route, Link } from 'react-router-dom';
 
-import Users from './pages/Users';
-import NewUser from './pages/NewUser';
+import routes from './routes';
 import { UserProvider } from './contexts/User';
+import Breadcrumb from './components/Breadcrumb';
 
 import './main.less';
 
-export default function Routes() {
+export default function App() {
 	return (
 		<UserProvider>
 			<HashRouter>
+			<Breadcrumb>
+				{routes.map(({path, name}, key) => (
+					<Link to={path} key={key}>
+						{name}
+					</Link>
+				))}
+			</Breadcrumb>
 				<Switch>
-					<Route path="/users" exact component={Users}></Route>
-					<Route path="/users/new" component={NewUser}></Route>
+					{routes.map(({path, exact, Component}, key) => (
+						<Route path={path} key={key} exact={exact} component={Component}></Route>
+					))}
 				</Switch>
 			</HashRouter>
 		</UserProvider>
