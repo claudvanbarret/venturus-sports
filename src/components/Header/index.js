@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import './style.less';
 
 export default function Header() {
-    const [userInfo, setUserInfo] = useState(false);
+    const [userInfo, setUserInfo] = useState({});
     const [showMenu, setShowMenu] = useState(false);
     const wrapperRef = useRef(null);
 
@@ -20,6 +20,16 @@ export default function Header() {
         }
     }
 
+    function getInitials(name){
+        const names = name.split(' ');
+        let initials = '';
+        names.forEach(n => {
+            initials += n.charAt(0);
+        });
+
+        return initials.slice(0, 2).toUpperCase();
+    }
+
     function escFunction(event) {
         if(event.key === 'Escape') {
             setShowMenu(false);
@@ -33,7 +43,9 @@ export default function Header() {
     } 
 
     useEffect(() => {
-        setUserInfo(getUserInfo);
+        let info = getUserInfo();
+        info.initials = getInitials(info.name);
+        setUserInfo(info);
 
         document.addEventListener("keydown", escFunction);
         document.addEventListener("mousedown", handleClickOutside);
@@ -54,6 +66,7 @@ export default function Header() {
             </div>
             <div className="header-dropdown-menu">
                 <div className="user-info" onClick={() => setShowMenu(true)}>
+                    <span className="initials">{userInfo.initials}</span>
                     <span className="name">{userInfo.name}</span>
                     <i className="fas fa-chevron-down"></i>
                 </div>
@@ -62,10 +75,6 @@ export default function Header() {
                         {userInfo.menuItems.map((menuItem, key) => (
                             <Link to="" key={key} className="menu-item">{menuItem}</Link>
                         ))}
-                        {/* <li className="menu-item">Friend List</li>
-                        <li className="menu-item">Saved Items</li>
-                        <li className="menu-item">Notifications</li>
-                        <li className="menu-item">User Preferences</li> */}
                         <a className="menu-item divider">Log out</a>
                     </div>
                     : null
