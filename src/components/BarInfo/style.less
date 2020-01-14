@@ -1,0 +1,43 @@
+@import '../../variables.less';
+
+.bar-info {
+    display: flex;
+    align-items: center;
+    height: 140px;
+    background-color: @green-light;
+    margin-bottom: 50px;
+    
+    .bar-list {
+        display: flex;
+        width: 90%;
+        margin: auto;
+    }
+
+    .bar-item {
+        display: flex;
+    }
+
+    i {
+        margin-right: 20px;
+        color: @green;
+        font-size: 50px;
+    }
+
+    .bar-body {
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+
+        .bar-title {
+            color: #666666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .bar-description {
+            color: @grey;
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+}
