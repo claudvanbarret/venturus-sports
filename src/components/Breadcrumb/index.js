@@ -14,7 +14,7 @@ export default function Breadcrumb() {
                         <Link to={path}>
                             {name}
                         </Link>
-                        <i className="fas fa-chevron-right"></i>
+                        { key < routes.length - 1 ?  <i className="fas fa-chevron-right"></i> : null }
                     </div>
                 ))}
             </div>

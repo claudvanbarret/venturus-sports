@@ -3,17 +3,17 @@ import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import routes from './routes';
 import { UserProvider } from './contexts/User';
-import Breadcrumb from './components/Breadcrumb';
 import Header from './components/Header';
 
 import './main.less';
+import Breadcrumb from './components/Breadcrumb';
 
 export default function App() {
 	return (
 		<UserProvider>
 			<HashRouter>
 				<Header/>
-				<Breadcrumb/>	
+				<Breadcrumb/>
 				<Switch>
 					<Redirect exact from="/" to="/users" />
 					{routes.map(({path, exact, Component}, key) => (
