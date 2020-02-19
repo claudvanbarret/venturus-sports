@@ -1,16 +1,18 @@
 import React from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import routes from './routes';
-import { UserProvider } from './contexts/User';
 import Header from './components/Header';
+import Breadcrumb from './components/Breadcrumb';
+import routes from './routes';
+
+import store from './store';
 
 import './main.less';
-import Breadcrumb from './components/Breadcrumb';
 
 export default function App() {
 	return (
-		<UserProvider>
+		<Provider store={store}>
 			<HashRouter>
 				<Header/>
 				<Breadcrumb/>
@@ -21,6 +23,6 @@ export default function App() {
 					))}
 				</Switch>
 			</HashRouter>
-		</UserProvider>
+		</Provider>
 	)
 }

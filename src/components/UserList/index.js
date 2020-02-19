@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropertyUtils from '../../utils/PropertyUtils';
 
 import './style.less';
 import ConfirmDialog from '../ConfirmDialog';
 
-export default function ListUser(props){
-    const {users, deleteUser, filterUsers} = props;
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as UsersActions from '../../store/users/actions';
+import UserService from '../../services/users';
+
+function UserList({ users, deleteUser, searchUser, setUsers }){
     const [confirm, setConfirm] = useState(false);
     const [user, setUser] = useState(false);
     const [searchText, setSearchText] = useState('');
+
+    async function getUsers() {
+        const users = await UserService.getUsers();
+        setUsers(users);
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, [])
 
     function openModal(user){
         setConfirm(true);
@@ -17,7 +30,7 @@ export default function ListUser(props){
 
     function handleChangeSearchText({ target : { value }}) {    
         setSearchText(value);
-        filterUsers(value);
+        searchUser(value);
     }
 
     return (
@@ -72,3 +85,12 @@ export default function ListUser(props){
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    users: state.usersReducer.users
+});
+
+const mapDispatchToProps = dispatch => 
+    bindActionCreators(UsersActions, dispatch);
+
+export default  connect(mapStateToProps, mapDispatchToProps)(UserList);

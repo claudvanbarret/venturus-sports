@@ -5,11 +5,15 @@ import InputRadio from '../InputRadio';
 import InputCheckbox from '../InputCheckbox';
 import PropertyUtils from '../../utils/PropertyUtils';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addUser }from '../../store/users/actions';
+
 import './style.less';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export default class FormUser extends Component {
+class FormUser extends Component {
     
     constructor(props) {
         super(props);
@@ -73,7 +77,7 @@ export default class FormUser extends Component {
 
         user.daysOfTheWeek = user.daysOfTheWeek.join(', ');
 
-        this.props.handleSubmit(user);
+        this.props.addUser(user);
         this.resetForm();
     }
 
@@ -120,3 +124,17 @@ export default class FormUser extends Component {
         );
     }
 }
+
+
+const mapStateToProps = state => ({
+    users: state.users
+});
+
+const mapDispatchToProps = (dispatch) => {
+   return bindActionCreators({
+       addUser
+   }, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormUser);
